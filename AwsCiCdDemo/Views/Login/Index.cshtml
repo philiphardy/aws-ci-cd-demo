@@ -1,0 +1,21 @@
+﻿@if (ViewBag.loginUnsuccessful == true)
+{
+    <form class="login-form jumbotron has-error" method="post">
+        <h2>Welcome! Please login.</h2>
+        <div class="form-group">
+            <input autofocus class="form-control" name="password" placeholder="Password" type="password" />
+            <small class="control-label">The password was incorrect.</small>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+}
+else
+{
+    <form class="login-form jumbotron" method="post">
+        <h2>Welcome! Please login.</h2>
+        <div class="form-group">
+            <input autofocus class="form-control" name="password" placeholder="Password" type="password" />
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+}
