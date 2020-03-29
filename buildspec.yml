@@ -3,13 +3,16 @@ version: 0.2
 env:
   variables:
     PROJECT: AwsCiCdDemo
-    DOTNET_FRAMEWORK: 4.5.2
+    DOTNET_FRAMEWORK: 4.6.2
 phases:
-  build:
+  pre_build:
     commands:
       - nuget restore
-      - msbuild $env:PROJECT.csproj /p:TargetFrameworkVersion=v$env:DOTNET_FRAMEWORK /p:Configuration=Release /p:DeployIisAppPath="Default Web Site" /p:PackageAsSingleFile=false /p:OutDir=C:\codebuild\artifacts\ /t:Package
+      - Start-Process "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" -ArgumentList 'modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools" --quiet --add Microsoft.VisualStudio.Component.NuGet.BuildTools --add Microsoft.Net.Component.4.6.2.TargetingPack --norestart --force' -Wait -PassThru
+  build:
+    commands:
+      - msbuild $env:PROJECT.csproj /p:TargetFrameworkVersion=v$env:DOTNET_FRAMEWORK /p:Configuration=Release /p:DeployIisAppPath="Default Web Site" /p:PackageAsSingleFile=false
 artifacts:
   files:
-    - '**/*'
-  base-directory: 'C:\codebuild\artifacts\_PublishedWebsites\${env:PROJECT}_Package\Archive\'
+    - 'appspec.yml'
+    - 'AwsCiCdDemo/**/*'

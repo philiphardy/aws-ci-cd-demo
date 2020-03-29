@@ -15,7 +15,7 @@ namespace AwsCiCdDemo.Filters
             this.service = AuthService.Instance;
         }
 
-        public void OnActionExecuting(ActionExecutingContext context)
+        override public void OnActionExecuting(ActionExecutingContext context)
         {
             if (!service.isAuthenticated(context.HttpContext.Request) && context.HttpContext.Request.Url.AbsolutePath != "/login")
             {

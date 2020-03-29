@@ -16,7 +16,7 @@ namespace AwsCiCdDemo.Services
 
         private AuthService()
         {
-            this.password = Environment.GetEnvironmentVariable("PASSWORD", EnvironmentVariableTarget.User);
+            this.password = Environment.GetEnvironmentVariable("PASSWORD", EnvironmentVariableTarget.Machine);
             if (this.password == null)
             {
                 Debug.WriteLine("No env variable PASSWORD found. Defaulting to 'password'");

@@ -1,0 +1,9 @@
+version: 0.0
+os: windows
+hooks:
+  ApplicationStop:
+    - location: ..\..\..\Clean.ps1
+      timeout: 30
+  BeforeInstall:
+    - location: ..\..\..\Deploy.ps1
+      timeout: 30
