@@ -1,12 +1,16 @@
 version: 0.2
 
+env:
+  variables:
+    PROJECT: AwsCiCdDemo
+
 phases:
   pre_build:
     commands:
       - nuget restore
   build:
     commands:
-      - msbuild AwsCiCdDemo.csproj /p:TargetFrameworkVersion=v4.6.2 /p:Configuration=Release /p:DeployIisAppPath="Default Web Site" /p:PackageAsSingleFile=false
+      - msbuild $env:PROJECT.csproj /p:TargetFrameworkVersion=v4.6.2 /p:Configuration=Release /p:DeployIisAppPath="Default Web Site" /p:PackageAsSingleFile=false
 
 artifacts:
   files:
