@@ -36,8 +36,8 @@ namespace AwsCiCdDemo.Services
             // run the git cmds via cmd prompt
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = String.Format("/c cd {0} && git commit --allow-empty -m \"Triggering build...{1}\" && git push origin build-and-deploy", this.gitProjectPath, commitMsg);
-            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.Arguments = String.Format("/c cd {0} && git commit --allow-empty -m \"Triggering build...{1}\" && git push origin build-and-deploy & pause", this.gitProjectPath, commitMsg);
+            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             Process.Start(startInfo);
         }
     }
