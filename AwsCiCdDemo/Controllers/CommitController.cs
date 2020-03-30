@@ -26,6 +26,7 @@ namespace AwsCiCdDemo.Controllers
             // check if a build is already running and if so, do not allow another commit to be created
 
             // add the commit
+            this.commitService.addEmptyCommit(commitMsg.commitMsg);
         }
     }
 }
