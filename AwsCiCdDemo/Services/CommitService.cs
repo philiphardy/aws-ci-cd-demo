@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Security;
 using System.Web;
 
 namespace AwsCiCdDemo.Services
@@ -21,10 +23,7 @@ namespace AwsCiCdDemo.Services
 
         public void addEmptyCommit(string commitMsg)
         {
-            if (this.gitProjectPath == null)
-            {
-                throw new Exception("No `GIT_PROJECT_PATH` env variable configured. Create it and restart the server.");
-            }
+            this.validateEnvironment();
 
             // format the commit message
             commitMsg = commitMsg.Trim();
@@ -35,10 +34,40 @@ namespace AwsCiCdDemo.Services
 
             // run the git cmds via cmd prompt
             ProcessStartInfo startInfo = new ProcessStartInfo();
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = String.Format("/c cd {0} && git commit --allow-empty -m \"Triggering build...{1}\" && git push origin build-and-deploy & pause", this.gitProjectPath, commitMsg);
-            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            Process.Start(startInfo);
+            startInfo.Arguments = String.Format("/c cd {0} && git checkout build-and-deploy && git commit --allow-empty -m \"Triggering build...{1}\" && echo committed > C:\\watch\\committed", this.gitProjectPath, commitMsg);
+            startInfo.CreateNoWindow = true;
+            startInfo.FileName = "C:\\Windows\\System32\\cmd.exe";
+            startInfo.RedirectStandardError = true;
+            startInfo.RedirectStandardOutput = true;
+            startInfo.UseShellExecute = false;
+            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            Process process = Process.Start(startInfo);
+            process.Exited += new EventHandler((sender, e) =>
+            {
+                File.WriteAllText("C:\\temp\\exit-code.txt", process.ExitCode.ToString());
+            });
+
+            process.ErrorDataReceived += new DataReceivedEventHandler((sender, e) =>
+            {
+                File.AppendAllText("C:\\temp\\log.err", e.Data);
+            });
+
+            process.OutputDataReceived += new DataReceivedEventHandler((sender, e) => {
+                File.AppendAllText("C:\\temp\\log.out", e.Data);
+            });
+
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+
+        }
+
+        private void validateEnvironment()
+        {
+            if (this.gitProjectPath == null)
+            {
+                throw new Exception("No `GIT_PROJECT_PATH` env variable configured. Create it and restart the server.");
+            }
         }
     }
 }
