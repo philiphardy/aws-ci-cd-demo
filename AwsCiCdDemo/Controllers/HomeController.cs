@@ -10,7 +10,7 @@ namespace AwsCiCdDemo.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "AWS CI/CD Demo";
 
             return View();
         }

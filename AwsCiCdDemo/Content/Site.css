@@ -3,13 +3,18 @@
     padding-bottom: 20px;
 }
 
+.jumbotron {
+    margin: auto;
+    max-width: 700px;
+}
+
+jumbotron p {
+    font-size: 18px;
+    line-height: 1.2;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
-}
-
-.login-form {
-    margin: auto;
-    max-width: 600px;
 }

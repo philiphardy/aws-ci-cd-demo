@@ -15,9 +15,9 @@ namespace AwsCiCdDemo
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "CommitApi",
+                routeTemplate: "api/commits",
+                defaults: new { controller = "commit" }
             );
         }
     }

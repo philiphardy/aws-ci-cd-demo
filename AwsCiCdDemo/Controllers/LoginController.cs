@@ -19,7 +19,7 @@ namespace AwsCiCdDemo.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.title = "Login";
+            ViewBag.title = "Login: AWS CI/CD Demo";
             return View();
         }
 

@@ -1,7 +1,8 @@
 ﻿@if (ViewBag.loginUnsuccessful == true)
 {
-    <form class="login-form jumbotron has-error" method="post">
-        <h2>Welcome! Please login.</h2>
+    <form class="jumbotron has-error" method="post">
+        <h1>AWS CI/CD Demo</h1>
+        <h4>Welcome! Please login.</h4>
         <div class="form-group">
             <input autofocus class="form-control" name="password" placeholder="Password" type="password" />
             <small class="control-label">The password was incorrect.</small>
@@ -11,8 +12,9 @@
 }
 else
 {
-    <form class="login-form jumbotron" method="post">
-        <h2>Welcome! Please login.</h2>
+    <form class="jumbotron" method="post">
+        <h1>AWS CI/CD Demo</h1>
+        <h4>Welcome! Please login.</h4>
         <div class="form-group">
             <input autofocus class="form-control" name="password" placeholder="Password" type="password" />
         </div>

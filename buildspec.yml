@@ -1,17 +1,13 @@
 version: 0.2
 
-env:
-  variables:
-    PROJECT: AwsCiCdDemo
-    DOTNET_FRAMEWORK: 4.6.2
 phases:
   pre_build:
     commands:
       - nuget restore
-      - Start-Process "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" -ArgumentList 'modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools" --quiet --add Microsoft.VisualStudio.Component.NuGet.BuildTools --add Microsoft.Net.Component.4.6.2.TargetingPack --norestart --force' -Wait -PassThru
   build:
     commands:
-      - msbuild $env:PROJECT.csproj /p:TargetFrameworkVersion=v$env:DOTNET_FRAMEWORK /p:Configuration=Release /p:DeployIisAppPath="Default Web Site" /p:PackageAsSingleFile=false
+      - msbuild AwsCiCdDemo.csproj /p:TargetFrameworkVersion=v4.6.2 /p:Configuration=Release /p:DeployIisAppPath="Default Web Site" /p:PackageAsSingleFile=false
+
 artifacts:
   files:
     - 'appspec.yml'
