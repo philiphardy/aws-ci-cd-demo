@@ -36,7 +36,10 @@
     @Scripts.Render("~/bundles/create-commit")
 
     <div class="list-group">
-        <div class="list-group-item active">Pipeline State <small>(Polls for the state every 5 seconds)</small></div>
+        <div class="list-group-item active">
+            Pipeline State <small>(Polls for the state every 5 seconds)</small>
+            <span class="label label-default" id="pipeline-status">Idle</span>
+        </div>
         <div class="list-group-item" id="pipeline-info-container"></div>
     </div>
     @Scripts.Render("~/bundles/pipeline-status-poll")
