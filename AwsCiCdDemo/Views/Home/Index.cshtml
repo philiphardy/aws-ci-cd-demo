@@ -4,14 +4,20 @@
 </div>
 <div class="row">
     <div>
-        <h2>How it works</h2>
-        <p></p>
+        <h2>How does it work?</h2>
+        <p>
+            Upon every push to the <code>master</code> and <code>build-and-deploy</code> branches, GitHub calls into CodePipeline on AWS using a webhook to kick off the CI/CD pipeline.
+            The pipeline first copies the project's source to the CodeBuild build server and compiles the project. If successful, the compiled project is bundled and pushed to an S3 bucket.
+            Once that completes, the pipeline initiates the CodeDeploy step which downloads the project bundle to this Windows Server on EC2, and installs the project.
+        </p>
     </div>
     <div>
         <h2>Try it out! <small>Don't be afraid.</small></h2>
-        <p>Use the form below to trigger a new build and deployment, by adding an empty commit to <a href="https://github.com/philiphardy/aws-ci-cd-demo/commits/build-and-deploy" target="_blank">this GitHub project</a>.</p>
-        <br/>
-        <span>Note: The pipeline should take about 5 minutes to complete.</span>
+        <p>
+            Use the form below to trigger a new build and deployment, by adding an empty commit to <a href="https://github.com/philiphardy/aws-ci-cd-demo/commits/build-and-deploy" target="_blank">this GitHub project</a>.
+            <br />
+            <small>Note: The pipeline should take about 5 minutes to complete.</small>
+        </p>
     </div>
     <form>
         <div class="form-group">
