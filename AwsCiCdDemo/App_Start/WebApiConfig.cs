@@ -19,6 +19,12 @@ namespace AwsCiCdDemo
                 routeTemplate: "api/commits",
                 defaults: new { controller = "commit" }
             );
+
+            config.Routes.MapHttpRoute(
+                name: "PipelineApi",
+                routeTemplate: "api/pipeline",
+                defaults: new { controller = "pipeline" }
+            );
         }
     }
 }

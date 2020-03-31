@@ -1,5 +1,6 @@
 ﻿using AwsCiCdDemo.Models;
 using AwsCiCdDemo.Services;
+using AwsCiCdDemo.Services.Aws;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,12 @@ namespace AwsCiCdDemo.Controllers
 {
     public class CommitController : ApiController
     {
-        private AwsService awsService;
+        private CodeBuildService codeBuildService;
         private CommitService commitService;
 
         public CommitController()
         {
-            this.awsService = new AwsService();
+            this.codeBuildService = new CodeBuildService();
             this.commitService = new CommitService();
         }
 
