@@ -26,7 +26,7 @@ namespace AwsCiCdDemo.Services
             this.validateEnvironment();
 
             // format the commit message
-            commitMsg = commitMsg.Trim();
+            commitMsg = commitMsg == null ? "" : commitMsg.Trim();
             if (commitMsg.Length > 0)
             {
                 commitMsg = String.Format(" {0}", commitMsg);

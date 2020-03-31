@@ -1,6 +1,6 @@
-﻿const textarea = document.getElementById('commit-msg-txt');
+﻿const textarea = $('#commit-msg-txt');
 
-document.getElementById('commit-btn').addEventListener('click', () => {
+$('#commit-btn').click(() => {
     $.ajax({
         url: '/api/commits',
         contentType: 'application/json',
