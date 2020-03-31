@@ -4,7 +4,7 @@ $('#commit-btn').click(() => {
     $.ajax({
         url: '/api/commits',
         contentType: 'application/json',
-        data: JSON.stringify({ commitMsg: textarea.value }),
+        data: JSON.stringify({ commitMsg: textarea.val() }),
         method: 'POST',
     })
         .done(() => console.log("success!"))
